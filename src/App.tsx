@@ -1,15 +1,11 @@
-import React from "react";
 import { ThemeProvider } from "@mui/material";
-import PokemonProvider from "./components/Contexts/PokemonProvider";
-import Home from "./pages/Home";
 import { baseTheme } from "./theme";
+import Home from "./pages/Home";
 
 function App() {
   return (
     <ThemeProvider theme={baseTheme}>
-      <PokemonProvider>
-        <Home />
-      </PokemonProvider>
+      <Home />
     </ThemeProvider>
   );
 }

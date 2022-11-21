@@ -10,19 +10,20 @@ import {
   Dialog,
   ThemeProvider,
 } from "@mui/material";
-import { PokemonStat, PokemonType } from "./Contexts/PokemonProvider";
+import {
+  PokemonStat,
+  PokemonType,
+  IExtendedPokemonForm,
+} from "../@types/pokemonTypes";
 import { useEffect, useRef, useState } from "react";
 import PokemonModal from "./PokemonModal";
-import { baseTheme, getTheme } from "../theme";
-import PokeAPI, {
-  IChainLink,
-  INamedApiResource,
-  IPokemon,
-} from "pokeapi-typescript";
+import { baseTheme } from "../theme";
+import { getTheme } from "../utils/pokemonUtils";
+import PokeAPI, { IChainLink } from "pokeapi-typescript";
 import { getIdFromUrl, isOG } from "../utils";
 
 interface PokemonCardProps {
-  pokemon: INamedApiResource<IPokemon>;
+  pokemon: IExtendedPokemonForm;
   isFavourite: boolean;
   onAddFavourite: () => void;
   onRemoveFavourite: () => void;
@@ -57,8 +58,8 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
   const [evolutions, setEvolutions] = useState<IChainLink[]>();
   const ref = useRef<HTMLDivElement>(null);
 
-  const name = pokemon.name[0].toUpperCase() + pokemon.name.slice(1);
-  const id = getIdFromUrl(pokemon.url);
+  const name = pokemon.pokemon.name[0].toUpperCase() + pokemon.name.slice(1);
+  const id = getIdFromUrl(pokemon.pokemon.url);
   const number = `#${("000" + id).slice(-3)}`;
   const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
 
@@ -72,7 +73,8 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
     );
 
     observer.observe(ref.current);
-  }, [ref.current]);
+    return () => observer.disconnect();
+  }, [ref.current]); // eslint-disable-line
 
   useEffect(() => {
     // only fetch data for pokemon in view
@@ -194,7 +196,23 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
         setEvolutions(chain);
       })
       .finally(() => setLoading(false));
-  }, [isVisible, pokemon.url]);
+    // cleanup function
+    return () => {
+      setTypes([]);
+      setExperience(undefined);
+      setHeight(undefined);
+      setWeight(undefined);
+      setAbilities(undefined);
+      setHp(undefined);
+      setAttack(undefined);
+      setDefense(undefined);
+      setSpecialAttack(undefined);
+      setSpecialDefense(undefined);
+      setSpeed(undefined);
+      setDescription(undefined);
+      setEvolutions(undefined);
+    };
+  }, [isVisible, name, pokemon.pokemon.url]);
 
   function handleToggleFavourite() {
     if (isFavourite) {
@@ -245,7 +263,16 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
                 }}
               >
                 <Fade in={!loading} timeout={DURATION}>
-                  <CardMedia component="img" height="250" image={imageUrl} />
+                  <CardMedia
+                    component="img"
+                    height="250"
+                    image={imageUrl}
+                    alt={`${id} sprite`}
+                    sx={{
+                      objectFit: "contain",
+                      backgroundPosition: "bottom right",
+                    }}
+                  />
                 </Fade>
               </Box>
             </Box>

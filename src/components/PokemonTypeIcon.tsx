@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { SvgIcon, SvgIconProps } from "@mui/material";
-import { PokemonType } from "./Contexts/PokemonProvider";
+import { PokemonType } from "../@types/pokemonTypes";
 import { ReactComponent as BugIcon } from "../assets/icons/bug.svg";
 import { ReactComponent as DarkIcon } from "../assets/icons/dark.svg";
 import { ReactComponent as DragonIcon } from "../assets/icons/dragon.svg";
@@ -20,15 +20,15 @@ import { ReactComponent as RockIcon } from "../assets/icons/rock.svg";
 import { ReactComponent as SteelIcon } from "../assets/icons/steel.svg";
 import { ReactComponent as WaterIcon } from "../assets/icons/water.svg";
 
-interface PokemonTypeIconProps extends SvgIconProps {
+interface IPokemonTypeIconProps extends SvgIconProps {
   type: PokemonType;
 }
 
-const PokemonTypeIcon: React.FC<PokemonTypeIconProps> = ({
+const PokemonTypeIcon: React.FC<IPokemonTypeIconProps> = ({
   type,
   ...props
 }) => {
-  const [icon, setIcon] = useState<React.FC>(getIcon());
+  let icon = getIcon();
 
   function getIcon() {
     switch (type) {

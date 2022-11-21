@@ -1,5 +1,4 @@
 import { createTheme } from "@mui/material";
-import { PokemonType } from "../components/Contexts/PokemonProvider";
 
 declare module "@mui/material/Paper" {
   interface PaperPropsVariantOverrides {
@@ -184,6 +183,16 @@ export const baseTheme = createTheme({
         },
       },
     },
+    MuiTab: {
+      styleOverrides: {
+        root: {
+          color: "#000",
+          textTransform: "capitalize",
+          fontWeight: 700,
+          fontSize: "1rem",
+        },
+      },
+    },
   },
 });
 
@@ -322,39 +331,3 @@ export const greyTheme = createTheme(baseTheme, {
     },
   },
 });
-
-export function getTheme(type: PokemonType) {
-  switch (type) {
-    case PokemonType.bug:
-    case PokemonType.flying:
-    case PokemonType.grass:
-      return greenTheme;
-
-    case PokemonType.electric:
-    case PokemonType.fighting:
-      return yellowTheme;
-
-    case PokemonType.fire:
-    case PokemonType.dragon:
-      return redTheme;
-
-    case PokemonType.ice:
-    case PokemonType.normal:
-    case PokemonType.steel:
-    case PokemonType.water:
-      return blueTheme;
-
-    case PokemonType.poison:
-    case PokemonType.dark:
-    case PokemonType.ghost:
-      return purpleTheme;
-
-    case PokemonType.psychic:
-    case PokemonType.fairy:
-      return pinkTheme;
-
-    case PokemonType.ground:
-    case PokemonType.rock:
-      return brownTheme;
-  }
-}

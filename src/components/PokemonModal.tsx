@@ -11,7 +11,7 @@ import {
 import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
 import FavouriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 import FavouriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
-import { PokemonType } from "./Contexts/PokemonProvider";
+import { PokemonType } from "../@types/pokemonTypes";
 import { useState } from "react";
 import PokemonAbout from "./PokemonAbout";
 import PokemonStats from "./PokemonStats";
@@ -81,11 +81,15 @@ const PokemonModal: React.FC<PokemonModalProps> = ({
             pt: 4,
           }}
         >
-          <IconButton onClick={onClose} color="inherit">
+          <IconButton onClick={onClose} color="inherit" aria-label="close">
             <ArrowBackRoundedIcon />
           </IconButton>
 
-          <IconButton onClick={onToggleFavourite} color="inherit">
+          <IconButton
+            onClick={onToggleFavourite}
+            color="inherit"
+            aria-label="favourite"
+          >
             {isFavourite ? (
               <FavouriteRoundedIcon />
             ) : (
@@ -136,6 +140,7 @@ const PokemonModal: React.FC<PokemonModalProps> = ({
         <Box
           component="img"
           src={imageUrl}
+          alt={name}
           sx={{
             position: "absolute",
             left: "50%",

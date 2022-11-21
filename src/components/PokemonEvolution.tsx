@@ -47,35 +47,17 @@ const EvolutionChain: React.FC<EvolutionChainProps> = ({ from, to }) => {
         textAlign: "center",
       }}
     >
-      <Box
-        sx={{
-          flexBasis: "50%",
-        }}
-      >
+      <Box sx={{ flexBasis: "50%" }}>
         <Evolution name={from.name} url={from.url} />
       </Box>
-
-      <Box
-        sx={{
-          flexBasis: "50%",
-        }}
-      >
+      <Box sx={{ flexBasis: "50%" }}>
         {to.map((link) => (
           <Box
             key={link.species.name}
-            sx={{
-              display: "flex",
-              alignItems: "center",
-            }}
+            sx={{ display: "flex", alignItems: "center" }}
           >
             <ArrowForwardRoundedIcon />
-
-            <Box
-              sx={{
-                alignSelf: "center",
-                flex: 1,
-              }}
-            >
+            <Box sx={{ alignSelf: "center", flex: 1 }}>
               <Evolution name={link.species.name} url={link.species.url} />
             </Box>
           </Box>
@@ -109,7 +91,12 @@ const Evolution: React.FC<EvolutionProps> = ({ name, url }) => {
         }}
       />
       <Box sx={{ position: "relative", zIndex: 2 }}>
-        <Box component="img" height={150} src={imageUrl} />
+        <Box
+          component="img"
+          height={150}
+          src={imageUrl}
+          alt={`${id} evolution`}
+        />
         <Typography align="center">{name}</Typography>
       </Box>
     </Box>

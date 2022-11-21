@@ -1,6 +1,6 @@
 import { Grid, LinearProgress, Typography } from "@mui/material";
 
-interface PokemonStatsProps {
+interface IPokemonStatsProps {
   hp: number;
   attack: number;
   defense: number;
@@ -9,7 +9,7 @@ interface PokemonStatsProps {
   speed: number;
 }
 
-const PokemonStats: React.FC<PokemonStatsProps> = ({
+const PokemonStats: React.FC<IPokemonStatsProps> = ({
   hp,
   attack,
   defense,
@@ -19,56 +19,56 @@ const PokemonStats: React.FC<PokemonStatsProps> = ({
 }) => {
   return (
     <Grid container spacing={2} sx={{ alignItems: "center" }}>
-      <Grid item sm={3}>
+      <Grid item xs={6} sm={3}>
         <Typography variant="caption">HP</Typography>
       </Grid>
-      <Grid item sm={2}>
+      <Grid item xs={6} sm={2}>
         <Typography>{hp}</Typography>
       </Grid>
-      <Grid item sm={7}>
+      <Grid item xs={12} sm={7}>
         <LinearProgress variant="determinate" value={(hp / 150) * 100} />
       </Grid>
 
-      <Grid item sm={3}>
+      <Grid item xs={6} sm={3}>
         <Typography variant="caption">Attack</Typography>
       </Grid>
-      <Grid item sm={2}>
+      <Grid item xs={6} sm={2}>
         <Typography>{attack}</Typography>
       </Grid>
-      <Grid item sm={7}>
+      <Grid item xs={12} sm={7}>
         <LinearProgress variant="determinate" value={(attack / 150) * 100} />
       </Grid>
 
-      <Grid item sm={3}>
+      <Grid item xs={6} sm={3}>
         <Typography variant="caption">Defense</Typography>
       </Grid>
-      <Grid item sm={2}>
+      <Grid item xs={6} sm={2}>
         <Typography>{defense}</Typography>
       </Grid>
-      <Grid item sm={7}>
+      <Grid item xs={12} sm={7}>
         <LinearProgress variant="determinate" value={(defense / 150) * 100} />
       </Grid>
 
-      <Grid item sm={3}>
+      <Grid item xs={6} sm={3}>
         <Typography variant="caption">Sp. Attack</Typography>
       </Grid>
-      <Grid item sm={2}>
+      <Grid item xs={6} sm={2}>
         <Typography>{specialAttack}</Typography>
       </Grid>
-      <Grid item sm={7}>
+      <Grid item xs={12} sm={7}>
         <LinearProgress
           variant="determinate"
           value={(specialAttack / 200) * 100}
         />
       </Grid>
 
-      <Grid item sm={3}>
+      <Grid item xs={6} sm={3}>
         <Typography variant="caption">Sp. Defense</Typography>
       </Grid>
-      <Grid item sm={2}>
+      <Grid item xs={6} sm={2}>
         <Typography>{specialDefense}</Typography>
       </Grid>
-      <Grid item sm={7}>
+      <Grid item xs={12} sm={7}>
         <LinearProgress
           variant="determinate"
           value={(specialDefense / 150) * 100}

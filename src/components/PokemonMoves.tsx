@@ -1,5 +1,4 @@
 import { Divider, Stack, Box, Typography } from "@mui/material";
-import { useState } from "react";
 
 interface PokemonMove {
   name: string;
@@ -11,7 +10,7 @@ interface PokemonMovesProps {
 }
 
 const PokemonMoves: React.FC<PokemonMovesProps> = ({ moves }) => {
-  const [levels, setLevels] = useState(organizeByLevel());
+  let levels = organizeByLevel();
 
   function organizeByLevel() {
     return moves.reduce((accum: { [key: string]: string[] }, move) => {
